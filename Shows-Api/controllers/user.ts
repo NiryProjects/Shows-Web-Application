@@ -2,13 +2,13 @@ import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
+import { sendMail } from "../src/utils/emailService";
+import { getPassword } from "../src/utils/passwordGenerator";
 import {
   createPasswordStrengthValidator,
   isEmailValid,
   isUsernameValid,
 } from "../src/utils/validators";
-const sendMail = require("../sendmail");
-const createPassword = require("../makePassword");
 
 // ─── Request Body Interfaces ────────────────────────────────────────────────
 
@@ -267,8 +267,8 @@ export const userForgotPassword = async (
       return;
     }
 
-    const newPassword: string = createPassword.GetPassword();
-    const acceptedMail: number = await sendMail.sendMail(
+    const newPassword: string = getPassword();
+    const acceptedMail: number = await sendMail(
       email,
       username,
       newPassword

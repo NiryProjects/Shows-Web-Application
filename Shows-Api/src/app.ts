@@ -4,11 +4,11 @@ import connectToMongo from "./connectDb";
 
 // ─── TypeScript Routes (ESM imports) ────────────────────────────────────────
 import friendsRoutes from "../routes/friends";
+import showsRoutes from "../routes/shows";
 import showsGameRoutes from "../routes/showsGame";
 import userRoutes from "../routes/user";
 
 // ─── Still-JS Routes (CJS require) ─────────────────────────────────────────
-const showsRoutes = require("../routes/shows");
 const testingRoutes = require("../routes/testing");
 
 // ─── Bootstrap ──────────────────────────────────────────────────────────────

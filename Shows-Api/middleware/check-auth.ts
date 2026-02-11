@@ -36,3 +36,7 @@ const checkAuth = (req: Request, res: Response, next: NextFunction): void => {
 };
 
 export default checkAuth;
+
+// CJS compatibility — allows require("../middleware/check-auth") to return the function directly
+module.exports = checkAuth;
+module.exports.default = checkAuth;
