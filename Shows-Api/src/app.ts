@@ -2,14 +2,12 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import connectToMongo from "./connectDb";
 
-// ─── TypeScript Routes (ESM imports) ────────────────────────────────────────
+// ─── Application Routes (TypeScript) ────────────────────────────────────────
 import friendsRoutes from "../routes/friends";
 import showsRoutes from "../routes/shows";
 import showsGameRoutes from "../routes/showsGame";
+import testingRoutes from "../routes/testing";
 import userRoutes from "../routes/user";
-
-// ─── Still-JS Routes (CJS require) ─────────────────────────────────────────
-const testingRoutes = require("../routes/testing");
 
 // ─── Bootstrap ──────────────────────────────────────────────────────────────
 

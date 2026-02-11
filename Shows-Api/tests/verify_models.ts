@@ -1,7 +1,6 @@
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-// ADJUST THESE IMPORTS if your file names are different (e.g. User.ts)
-// import User from '../models/User';
 import User from '../models/User';
 
 dotenv.config();
@@ -10,8 +9,8 @@ const runVerification = async () => {
   console.log("🔍 STARTING MODEL VERIFICATION...");
 
   // 1. Connect to DB
-  // We reconstruct the URI here to ensure we are testing isolation
-  const uri = `mongodb+srv://${process.env.DbUser}:${process.env.DbString}@cluster0-shows-app.ljiuw6y.mongodb.net/TesttDatabase?retryWrites=true&w=majority`;
+  // Fixed typo: TesttDatabase -> TestDatabase
+  const uri = `mongodb+srv://${process.env.DbUser}:${process.env.DbString}@cluster0-shows-app.ljiuw6y.mongodb.net/TestDatabase?retryWrites=true&w=majority`;
 
   try {
     await mongoose.connect(uri);
@@ -24,10 +23,12 @@ const runVerification = async () => {
   // 2. Test the USER Model
   const testEmail = `verify_${Date.now()}@test.com`;
   try {
-    console.log("👉 Testing USER creation...");
+    console.log("👉 Testing USER creation (with hashing)...");
+    const hashedPassword = await bcrypt.hash("testpassword123", 10);
+
     const newUser = new User({
       email: testEmail,
-      password: "testpassword123", // In a real app, hash this!
+      password: hashedPassword,
       username: `user_${Date.now()}`
     });
 
