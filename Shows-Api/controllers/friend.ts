@@ -2,9 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import Friend from "../models/Friend";
 import Show from "../models/Show";
 import User from "../models/User";
-
-// Still-JS module — use require() for CJS compatibility
-const Validators = require("../validators");
+import { isUsernameValid } from "../src/utils/validators";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -19,9 +17,9 @@ export const SearchFindUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const friendname = req.params.friendname;
+    const friendname = req.params.friendname as string;
 
-    if (!Validators.isUsernameValid(friendname)) {
+    if (!isUsernameValid(friendname)) {
       res.status(400).json({ message: "username not in the right format!" });
       return;
     }

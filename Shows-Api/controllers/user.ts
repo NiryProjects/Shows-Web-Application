@@ -2,9 +2,11 @@ import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-
-// Still-JS modules — use require() for CJS compatibility
-const Validators = require("../validators");
+import {
+  createPasswordStrengthValidator,
+  isEmailValid,
+  isUsernameValid,
+} from "../src/utils/validators";
 const sendMail = require("../sendmail");
 const createPassword = require("../makePassword");
 
@@ -41,7 +43,7 @@ export const createUser = async (
 ): Promise<void> => {
   const { password, email, username } = req.body;
 
-  if (!Validators.isEmailValid(email)) {
+  if (!isEmailValid(email)) {
     res.status(400).json({
       message:
         "Invalid authentication credentials! email is not in the right format!",
@@ -49,7 +51,7 @@ export const createUser = async (
     return;
   }
 
-  if (!Validators.isUsernameValid(username)) {
+  if (!isUsernameValid(username)) {
     res.status(400).json({
       message:
         "Invalid authentication credentials! username not in the right format!",
@@ -57,7 +59,7 @@ export const createUser = async (
     return;
   }
 
-  if (!Validators.createPasswordStrengthValidator(password)) {
+  if (!createPasswordStrengthValidator(password)) {
     res.status(400).json({
       message:
         "Invalid authentication credentials! password is too weak!",
@@ -116,7 +118,7 @@ export const userLogin = (
 
   const { email } = req.body;
 
-  if (!Validators.isEmailValid(email)) {
+  if (!isEmailValid(email)) {
     res.status(400).json({
       message:
         "Invalid authentication credentials! email is not in the right format!",
@@ -173,7 +175,7 @@ export const userChangePassword = async (
 
   console.log(password, email, newPassword);
 
-  if (!Validators.isEmailValid(email)) {
+  if (!isEmailValid(email)) {
     res.status(400).json({
       message:
         "Invalid authentication credentials! email is not in the right format!",
@@ -181,7 +183,7 @@ export const userChangePassword = async (
     return;
   }
 
-  if (!Validators.createPasswordStrengthValidator(newPassword)) {
+  if (!createPasswordStrengthValidator(newPassword)) {
     res.status(400).json({
       message: "Invalid authentication credentials!",
     });
