@@ -1,6 +1,6 @@
-const User = require("../models/user");
-const Friend = require("../models/friend");
-const Shows = require("../models/show");
+const User = require("../models/User");
+const Friend = require("../models/Friend");
+const Shows = require("../models/Show");
 const Validators = require("../validators");
 
 

@@ -6,7 +6,6 @@ const testingRoutes = require("./routes/testing");
 const userRoutes = require("./routes/user");
 const showsRoutes = require("./routes/shows");
 const friendsRoutes = require("./routes/friends");
-const configToEnv = require("./configToEnv");
 
 
 
@@ -15,9 +14,8 @@ const app = express();
 
 const connectToMyMongo = require("./connectDb");
 
-
-
-configToEnv();
+// Load environment variables from .env file
+require("dotenv").config();
 
 ////// invoke connection to mongoDB
 connectToMyMongo();

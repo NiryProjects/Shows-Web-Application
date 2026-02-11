@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("../models/User");
 const Validators = require("../validators");
 const sendMail = require("../sendmail");
 const createPassword = require("../makePassword");

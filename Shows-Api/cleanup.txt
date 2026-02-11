@@ -1,0 +1,16 @@
+# Cleanup & Technical Debt Tracking
+
+## Security
+- [ ] Hash passwords in `tests/verify_models.ts` (current test uses plain text).
+- [ ] Resolve npm vulnerabilities (3 remaining: 1 moderate, 2 high) using `npm audit fix`.
+- [ ] Verify security logic in `docs/security/security-analysis.md`.
+
+## Deprecations & Modernization
+- [ ] Replace `url.parse()` with WHATWG URL API in `server.js`.
+- [ ] Replace deprecated `punycode` module.
+- [ ] Convert `server.js` and other remaining `.js` files in `Shows-Api` to TypeScript.
+
+## Configuration & Scripts
+- [ ] Add `dev` and `build` scripts to `Shows-Api/package.json` for better TypeScript workflow.
+- [ ] Verify unique constraints logic in Mongoose models (migrated from JS).
+- [ ] Clean up `TesttDatabase` (misspelled or temporary test DB) in `tests/verify_models.ts`.

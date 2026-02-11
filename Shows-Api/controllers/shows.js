@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const Show = require("../models/show");
+const Show = require("../models/Show");
 
 
 // const dataStatic = require("../dataObj");
