@@ -12,3 +12,8 @@ const User = mongoose.model<UserType>("User", userSchema);
 
 export { userSchema, UserType };
 export default User;
+
+// CJS compatibility — allows require("../models/User") to return the model directly
+module.exports = User;
+module.exports.default = User;
+module.exports.userSchema = userSchema;

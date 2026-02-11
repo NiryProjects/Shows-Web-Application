@@ -16,3 +16,8 @@ const Friend = mongoose.model<FriendType>("Friend", friendSchema);
 
 export { friendSchema, FriendType };
 export default Friend;
+
+// CJS compatibility — allows require("../models/Friend") to return the model directly
+module.exports = Friend;
+module.exports.default = Friend;
+module.exports.friendSchema = friendSchema;

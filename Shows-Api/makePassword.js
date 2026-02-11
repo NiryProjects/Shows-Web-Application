@@ -3,7 +3,7 @@ function mySuffleString(str) {
     // While there remain elements to shuffle…
     // while (m) {
 
-    str = [...str]; // this becuse it's string 
+    str = [...str]; // this becuse it's string
 
     let r = str.length, i = 0;
 
@@ -20,7 +20,7 @@ function mySuffleString(str) {
     return str.join(''); // becouse i need it back to be string
 }
 
-smallLetters = [
+const smallLetters = [
     'a',
     'b',
     'c',
@@ -50,7 +50,7 @@ smallLetters = [
 
 ];
 
-capitlLetters = [
+const capitlLetters = [
     'A',
     'B',
     'C',
@@ -81,7 +81,7 @@ capitlLetters = [
 
 ];
 
-numbersAry = [
+const numbersAry = [
     '0',
     '1',
     '2',
@@ -95,7 +95,7 @@ numbersAry = [
 ];
 
 
-signs = [
+const signs = [
     '~',
     '!',
     '@',

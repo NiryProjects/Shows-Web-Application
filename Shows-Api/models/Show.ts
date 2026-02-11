@@ -18,3 +18,8 @@ const Show = mongoose.model<ShowType>("Show", showSchema);
 
 export { showSchema, ShowType };
 export default Show;
+
+// CJS compatibility — allows require("../models/Show") to return the model directly
+module.exports = Show;
+module.exports.default = Show;
+module.exports.showSchema = showSchema;
