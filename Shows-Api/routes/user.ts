@@ -1,9 +1,9 @@
 import express from "express";
+import * as UserController from "../controllers/user";
 
 const router = express.Router();
 
-// Controllers and middleware are still JS — use require() for compatibility
-const UserController = require("../controllers/user");
+// Middleware is still JS — use require() for compatibility
 const myTestMiddleware = require("../middleware/my-tests-middleware");
 
 router.post("/signup", myTestMiddleware, UserController.createUser);
