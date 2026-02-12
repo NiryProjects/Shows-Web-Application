@@ -21,6 +21,6 @@ export interface DataObj {
   tv: { items: MovieItem[] };
 }
 
-// Import raw JS data and cast to typed shape
-const rawData = require("../../dataObj");
-export const dataObj: DataObj = rawData.dataObj;
+// Import TS data
+import { dataObj as rawData } from "./dataObj";
+export const dataObj: DataObj = rawData;

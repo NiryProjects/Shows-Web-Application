@@ -3,7 +3,7 @@
 
 
 
-exports.dataObj = {
+export const dataObj = {
     movies: {
         "items": [
             {
