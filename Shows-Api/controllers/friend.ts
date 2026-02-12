@@ -49,7 +49,7 @@ export const SearchFindUser = async (
         friendId: friend._id,
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         message: "No Friend Around ...",
         found: false,
       });
