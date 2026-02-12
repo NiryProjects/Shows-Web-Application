@@ -1,23 +1,22 @@
 import mongoose from "mongoose";
 
 const connectToMongo = (): void => {
-  const dbUser = process.env.DbUser;
-  const dbString = process.env.DbString;
+  const uri = process.env.MONGODB_URI;
 
-  if (!dbUser || !dbString) {
-    console.error("Missing DbUser or DbString environment variables!");
+  if (!uri) {
+    console.error("Missing MONGODB_URI environment variable!");
     process.exit(1);
   }
 
-  const uri = `mongodb+srv://${dbUser}:${dbString}@cluster0-shows-app.ljiuw6y.mongodb.net/TesttDatabase?retryWrites=true&w=majority`;
+  // const uri = `mongodb+srv://${dbUser}:${dbString}@cluster0-shows-app.ljiuw6y.mongodb.net/TesttDatabase?retryWrites=true&w=majority`;
 
   mongoose
-    .connect(uri, { serverSelectionTimeoutMS: 5000 })
+    .connect(uri)
     .then(() => {
       console.log("Connected to database");
     })
     .catch((err) => {
-      console.error(err.reason);
+      console.error(err);
       console.error("Connection failed!");
     });
 };
