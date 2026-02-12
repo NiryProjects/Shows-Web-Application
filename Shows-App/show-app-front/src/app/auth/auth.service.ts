@@ -1,22 +1,22 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
 import { environment } from "../../environments/environment";
-import { AuthData } from "./auth-data.model";
+import { AuthData, AuthResponse } from "../models/auth.model";
 
 const BACKEND_URL = environment.apiUrl + "/user/";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
   private isAuthenticated = false;
-  private token: string;
-  private tokenTimer: any;
-  private userId: string;
+  private token: string | null = null;
+  private tokenTimer: any; // NodeJS.Timeout or number
+  private userId: string | null = null;
   private authStatusListener = new Subject<{ isAuthenticated: boolean, username: string }>();
-  private authPasswordChangedListener = new Subject<boolean>(); // isPasswordChanged
-  private username: string;
+  private authPasswordChangedListener = new Subject<boolean>();
+  private username: string | null = null;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -45,26 +45,24 @@ export class AuthService {
   }
 
   createUser(email: string, username: string, password: string) {
-    const authData: AuthData = { email: email, username: username, password: password };
+    const authData: AuthData = { email, username, password };
     this.http.post(BACKEND_URL + "signup", authData).subscribe({
       next: res => {
-        console.log("next >>> res ", res);
+        console.log("Signup success", res);
       },
       error: error => {
         this.authStatusListener.next({ isAuthenticated: false, username: "" });
       },
       complete: () => {
         this.router.navigate(["/"]);
-        console.log("complete??");
       }
     });
   }
 
   login(email: string, username: string, password: string) {
-    const authData: AuthData = { email: email, username: username, password: password };
-    console.log(BACKEND_URL + "login");
+    const authData: AuthData = { email, username, password };
     this.http
-      .post<{ token: string; expiresIn: number; userId: string, username: string }>(
+      .post<AuthResponse>(
         BACKEND_URL + "login",
         authData
       )
@@ -83,19 +81,14 @@ export class AuthService {
             const expirationDate = new Date(
               now.getTime() + expiresInDuration * 1000
             );
-            console.log(expirationDate);
             this.saveAuthData(token, expirationDate, this.userId, this.username);
             this.router.navigate(["/"]);
-
-            console.log("login Seccess ");
           }
         },
         error: error => {
-          console.log("login error ", error);
           this.authStatusListener.next({ isAuthenticated: false, username: "" });
         }
-      }
-      );
+      });
   }
 
   autoAuthUser() {
@@ -127,7 +120,6 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log("Setting timer: " + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
@@ -164,59 +156,38 @@ export class AuthService {
   }
 
   SaveNewPassword(email: string, password: string, newPassword: string) {
-
-    const newPasswordObj = { email, password, newPassword };
-
-    console.log("newPasswordObj", newPasswordObj);
-
+    const newPasswordObj: AuthData = { email, password, newPassword }; // Reusing AuthData
     this.http.post(BACKEND_URL + "changepassword", newPasswordObj).subscribe({
       next: res => {
-        console.log("next >>> res ", res);
+        console.log("Password changed", res);
       },
       error: error => {
         this.authPasswordChangedListener.next(false);
       },
       complete: () => {
         this.router.navigate(["/"]);
-        console.log("complete??");
       }
     });
-
   }
 
-  forgotPassword(email, username) {
-
+  forgotPassword(email: string, username: string) {
     const forgotPasswordObj = { email, username };
-
-    console.log("forgotPasswordObj", forgotPasswordObj);
-
     this.http.post(BACKEND_URL + "forgotpassword", forgotPasswordObj).subscribe({
       next: res => {
-        console.log("next >>> res , send to the mail", res);
+        console.log("Password reset email sent", res);
       },
       error: error => {
         this.authPasswordChangedListener.next(false);
-        console.log(error);
       },
       complete: () => {
         this.router.navigate(["/"]);
-        console.log("complete??");
       }
     });
-
   }
 
   quickEnter() {
     this.http.get(BACKEND_URL + "quickenter").subscribe({
-      next: res => {
-        // need to like the login.
-      },
-      error: error => {
-        // need to like the login.
-      },
-      complete: () => {
-        // need to like the login.
-      }
+      // Placeholder for future logic
     });
   }
 }

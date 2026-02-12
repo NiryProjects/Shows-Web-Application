@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ShowsService } from '../shows.service';
-import { Show } from '../show.model';
 import { Subscription } from 'rxjs';
+import { Show } from '../../models/show.model';
+import { ShowsService } from '../shows.service';
 
 @Component({
   selector: 'app-shows-list',

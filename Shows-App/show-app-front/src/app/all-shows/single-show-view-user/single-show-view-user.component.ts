@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Show } from '../show.model';
-import { ActivatedRoute } from '@angular/router';
-import { ShowsService } from '../shows.service';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Show } from '../../models/show.model';
+import { ShowsService } from '../shows.service';
 
 @Component({
   selector: 'app-single-show-view-user',

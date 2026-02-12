@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ClipsService } from '../clips.service';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Show } from '../../models/show.model';
+import { ClipsService } from '../clips.service';
 import { ShowsService } from '../shows.service';
-import { Show } from '../show.model';
 
 
 
