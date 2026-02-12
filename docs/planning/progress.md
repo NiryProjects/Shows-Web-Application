@@ -12,18 +12,19 @@
 - [x] Error interceptor with Material Dialog
 - [x] Route guards on protected pages
 - [x] Email-based password reset
+- [x] **Backend TypeScript migration (100% Coverage)**
+- [x] Technical due diligence / modernization planning
 
 ## In Progress 🔄
 
-- [ ] Technical due diligence / modernization planning
-- [ ] Documentation (was empty, now populated)
+- [ ] Security hardening (Secrets management & cleanup)
+- [ ] Documentation refinement
 
 ## Not Started ❌
 
 - [ ] Angular 16 → 19 upgrade
-- [ ] Backend TypeScript migration
-- [ ] Security hardening (secrets management)
 - [ ] Watch status feature
+- [ ] Remove friend feature
 - [ ] Remove friend feature
 - [ ] Karma → Jest migration
 - [ ] Standalone components migration

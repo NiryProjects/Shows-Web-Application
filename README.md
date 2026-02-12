@@ -4,12 +4,12 @@ A full-stack web app for managing a personal TV show and movie library, comparin
 
 ## Tech Stack
 
-| Layer    | Technology         | Version       |
-| -------- | ------------------ | ------------- |
-| Frontend | Angular + Material | 16.0          |
-| Backend  | Express.js         | 4.18          |
-| Database | MongoDB Atlas      | Mongoose 7.1  |
-| Auth     | JWT + bcrypt       | 1hr token TTL |
+| Layer    | Technology           | Version       |
+| -------- | -------------------- | ------------- |
+| Frontend | Angular + Material   | 16.0          |
+| Backend  | Express + TypeScript | 4.18 (Strict) |
+| Database | MongoDB Atlas        | Mongoose 7.1  |
+| Auth     | JWT + bcrypt         | 1hr token TTL |
 
 ## Features
 
@@ -23,7 +23,10 @@ A full-stack web app for managing a personal TV show and movie library, comparin
 
 ```
 Shows-Web-Application/
-├── Shows-Api/         # Express REST API (port 3000)
+├── Shows-Api/         # Express TS REST API (port 3000)
+│   ├── src/           # TS Source code
+│   ├── routes/        # TS Route handlers
+│   └── controllers/   # TS Business logic
 ├── Shows-App/         # Angular SPA (ng serve)
 ├── docs/              # Project documentation
 └── SYSTEM_SNAPSHOT.md # Full technical audit
@@ -35,12 +38,15 @@ Shows-Web-Application/
 # Backend
 cd Shows-Api
 npm install
-node server.js        # Runs on port 3000
+npm start             # Runs ts-node src/server.ts
+```
 
 # Frontend
+
 cd Shows-App/show-app-front
 npm install
-ng serve              # Runs on port 4200
+ng serve # Runs on port 4200
+
 ```
 
 ## Documentation
@@ -49,3 +55,4 @@ ng serve              # Runs on port 4200
 - [Backend Info](./Shows-Api/backend-info.md) — API routes and architecture
 - [Frontend Info](./Shows-App/show-app-front/frontend-info.md) — Angular structure
 - [Security Analysis](./docs/security/security-analysis.md) — Security risks
+```

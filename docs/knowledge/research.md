@@ -7,12 +7,12 @@
 - **Search:** `GET https://api.collectapi.com/imdb/imdbSearchByName?query=<term>`
 - **Details:** `GET https://api.collectapi.com/imdb/imdbSearchById?movieId=<id>`
 - **Auth:** Header `Authorization: apikey <key>`
-- **Used in:** `controllers/shows.js` (SearchShows, CreateUserShow)
+- **Used in:** `controllers/shows.ts`
 
 ### Exchange Rate API
 
 - **URL:** `https://open.er-api.com/v6/latest/USD`
-- **Used in:** `controllers/testing.js` (test-only polling endpoint)
+- **Used in:** `controllers/testing.ts` (test-only polling endpoint)
 
 ## Angular Patterns Used
 
