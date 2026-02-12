@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FriendsService } from 'src/app/friends/friends.service';
 import { Show } from '../show.model';
-import { Friend } from 'src/app/friends/friend';
 
 @Component({
   selector: 'app-single-show-view-friend',
@@ -46,7 +45,7 @@ export class SingleShowViewFriendComponent implements OnInit {
 
     if (!foundInFriendShow) {
       // this.userShow = this.friendsService.pickedFriend;
-      this.userActiveUsername = this.friendsService.myUserName;
+      this.userActiveUsername = localStorage.getItem("username") || "";
       console.log(" !foundInFriendShow  !foundInFriendShow");
       // return;
     }

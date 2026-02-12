@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Show } from 'src/app/all-shows/show.model';
 import { Friend } from '../friend';
 import { FriendsService } from '../friends.service';
-import { Show } from 'src/app/all-shows/show.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-friends-shows-list',
@@ -57,7 +57,7 @@ export class FriendsShowsListComponent implements OnInit, OnDestroy {
     });
 
     this.friendService.getAllFriendShows(this.friend);
-    this.usernameIn = this.friendService.myUserName;
+    this.usernameIn = localStorage.getItem("username") || "";
   }
 
 
