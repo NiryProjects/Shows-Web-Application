@@ -13,6 +13,8 @@
 - [x] Route guards on protected pages
 - [x] Email-based password reset
 - [x] **Backend TypeScript migration (100% Coverage)**
+- [x] **Frontend Refactor (Strict Typing & Centralized Models)**
+- [x] **Identity Bug Fixes (Stale LocalStorage data)**
 - [x] Technical due diligence / modernization planning
 
 ## In Progress 🔄

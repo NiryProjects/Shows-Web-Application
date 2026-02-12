@@ -1,5 +1,5 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Show } from '../show.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Show } from '../../models/show.model';
 
 @Component({
   selector: 'app-show-list-only',

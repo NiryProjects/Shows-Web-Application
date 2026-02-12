@@ -19,30 +19,20 @@ NgModule-based (not standalone components):
 ```
 src/app/
 ├── app.module.ts              # Root module — all declarations
-├── app-routing.module.ts      # Route definitions + AuthGuard
-├── error-interceptor.ts       # Global HTTP error → MatDialog
-├── angular-material.module.ts # Material module barrel
-├── auth/                      # Login, Signup, ChangePassword, ForgotPassword
-│   ├── auth.service.ts        # JWT auth (localStorage storage)
-│   ├── auth-interceptor.ts    # Attaches Bearer token to requests
-│   ├── auth.guard.ts          # CanActivate route guard
-│   └── auth.module.ts         # Lazy-loaded auth module
-├── all-shows/                 # Show library management
-│   ├── shows.service.ts       # CRUD operations via HttpClient
+├── models/                    # **[NEW]** Centralized strict models
+│   ├── auth.model.ts          # AuthData, AuthResponse
 │   ├── show.model.ts          # Show interface
-│   ├── clip.model.ts          # Clip interface (unused?)
-│   ├── shows-list/            # Show grid view
-│   ├── clip-create/           # Add new show (search + save)
-│   ├── single-show-view*/     # Show detail views (user/friend variants)
-│   └── show-list-only/        # Minimal list view
-├── friends/                   # Friend management + show comparison
-│   ├── friends.service.ts     # Friend CRUD + joint/different show queries
-│   └── friends-*/             # Search, list, card, friend-shows components
-├── shows-game/                # Higher/Lower rating game
-├── header/                    # Navigation bar
-├── settings/                  # User settings
-├── info-page/                 # Landing page
-└── myTest/                    # Dev test component
+│   └── movie-static.model.ts  # Static game data interface
+├── auth/                      # Login, Signup (Strictly typed)
+│   ├── auth.service.ts        # JWT auth (Typed API calls)
+...
+├── all-shows/                 # Show library management
+│   ├── shows.service.ts       # CRUD operations (Public `shows` array)
+│   ├── show.model.ts          # **[DELETED]** Moved to src/app/models/
+...
+├── friends/                   # Friend management
+│   ├── friends.service.ts     # Dynamic identity (localStorage lookup)
+...
 ```
 
 ## Key Patterns

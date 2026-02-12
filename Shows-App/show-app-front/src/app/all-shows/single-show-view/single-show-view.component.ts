@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ShowsService } from '../shows.service';
-import { Show } from '../show.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Show } from '../../models/show.model';
 
 // ClipCardComponent
 

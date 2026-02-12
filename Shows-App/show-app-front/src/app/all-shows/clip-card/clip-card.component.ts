@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ShowGame } from 'src/app/shows-game/shows-game-highlow/showGame.model';
-import { Show } from '../show.model';
+import { Show } from '../../models/show.model';
 import { ShowsService } from '../shows.service';
-import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-clip-card',

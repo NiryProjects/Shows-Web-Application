@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Show } from 'src/app/all-shows/show.model';
+import { Show } from 'src/app/models/show.model';
 import { Friend } from '../friend';
 import { FriendsService } from '../friends.service';
 

@@ -45,7 +45,12 @@ npm start             # Runs ts-node src/server.ts
 
 cd Shows-App/show-app-front
 npm install
-ng serve # Runs on port 4200
+npm start # (Runs ng serve on port 4200)
+
+## Recent Updates
+
+- **Strict Typing**: Frontend services now use strict TypeScript models (no `any`).
+- **Identity Fix**: Resolved stale identity bugs in FriendsService.
 
 ```
 

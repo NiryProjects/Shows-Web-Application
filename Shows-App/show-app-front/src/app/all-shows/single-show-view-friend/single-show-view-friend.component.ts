@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FriendsService } from 'src/app/friends/friends.service';
-import { Show } from '../show.model';
+import { Show } from '../../models/show.model';
 
 @Component({
   selector: 'app-single-show-view-friend',
