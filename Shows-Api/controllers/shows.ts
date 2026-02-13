@@ -1,4 +1,3 @@
-import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import Show from "../models/Show";
 import tmdb from "../src/utils/tmdb";
@@ -136,18 +135,8 @@ export const CreateUserShow = async (
       return;
     }
 
-    const urlApi = `https://api.collectapi.com/imdb/imdbSearchById?movieId=${apiId}`;
-    const config = {
-      headers: {
-        Authorization: `${process.env.ApiKey}`,
-      },
-    };
-
-    // Await API call *before* creating the show document
-    const showDataCall = await axios.get(urlApi, config);
-    const showData = showDataCall.data.result;
-
-    console.log("showData ", showData);
+    // Fetch details from TMDB to get runtime or seasons
+    const details = await tmdb.getShowDetails(apiId, req.body.type as "movie" | "tv");
 
     const newShow = new Show({
       creator: userId,
@@ -162,14 +151,9 @@ export const CreateUserShow = async (
     });
 
     if (newShow.type === "movie") {
-        // Safe check for runtime format
-      const minutes = showData?.Runtime
-        ? +showData.Runtime.split(" ")[0]
-        : 0;
-      newShow.minutes = minutes;
+      newShow.minutes = details.minutes;
     } else {
-      const seasons = showData?.totalSeasons;
-      newShow.seasons = seasons;
+      newShow.seasons = details.seasons;
       newShow.type = "tv";
     }
 

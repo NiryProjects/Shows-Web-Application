@@ -22,6 +22,7 @@ interface AppShow {
   rating: number;
   year: string;
   apiId: string;
+  type: "movie" | "tv";
 }
 
 const tmdbClient = axios.create({
@@ -67,6 +68,7 @@ export const searchMulti = async (query: string): Promise<AppShow[]> => {
           rating,
           year,
           apiId: item.id.toString(),
+          type: item.media_type as "movie" | "tv",
         };
       });
 
@@ -77,6 +79,27 @@ export const searchMulti = async (query: string): Promise<AppShow[]> => {
   }
 };
 
+export const getShowDetails = async (
+  apiId: string,
+  type: "movie" | "tv"
+): Promise<{ minutes?: number; seasons?: number }> => {
+  try {
+    const endpoint = type === "movie" ? `/movie/${apiId}` : `/tv/${apiId}`;
+    const response = await tmdbClient.get(endpoint);
+    const data = response.data;
+
+    if (type === "movie") {
+      return { minutes: data.runtime || 0 };
+    } else {
+      return { seasons: data.number_of_seasons || 0 };
+    }
+  } catch (error) {
+    console.error(`TMDB Details Error (${type}/${apiId}):`, error instanceof Error ? error.message : error);
+    return type === "movie" ? { minutes: 0 } : { seasons: 0 }; // Fail safe
+  }
+};
+
 export default {
   searchMulti,
+  getShowDetails,
 };
