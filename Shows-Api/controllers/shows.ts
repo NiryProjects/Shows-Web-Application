@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import Show from "../models/Show";
+import tmdb from "../src/utils/tmdb";
 
 // ─── Interfaces ─────────────────────────────────────────────────────────────
 
@@ -84,34 +85,19 @@ export const SearchShows = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const searchShow = req.params.searchShow;
-    const urlApi = `https://api.collectapi.com/imdb/imdbSearchByName?query=${searchShow}`;
+    const searchShow = req.params.searchShow as string;
 
-    const config = {
-      headers: {
-        Authorization: `${process.env.ApiKey}`,
+    // Use TMDB Service
+    const results = await tmdb.searchMulti(searchShow);
+
+    res.status(200).json({
+      health: "Online ! :)",
+      success: true,
+      responseApi: {
+        success: true,
+        result: results
       },
-    };
-
-    const response = await axios.get<ImdbApiResponse>(urlApi, config);
-    const responseApi = response.data;
-
-    console.log("Response?");
-    console.log(responseApi);
-
-    if (responseApi.success) {
-      res.status(200).json({
-        health: "Online ! :)",
-        success: responseApi.success,
-        responseApi,
-      });
-    } else {
-      res.status(200).json({
-        health: "Online ! :)",
-        success: responseApi.success,
-        responseApi: [],
-      });
-    }
+    });
   } catch (error: any) {
     console.error("External API Error:", error.response?.data || error.message);
 
