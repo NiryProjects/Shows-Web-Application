@@ -16,7 +16,7 @@ export class FriendsService {
 
   friends: Friend[] = [];
 
-  private searchfriendStatusListener = new Subject<{ friendId: string, found: boolean }>();
+  private searchfriendStatusListener = new Subject<{ friendId: string, found: boolean, message: string }>();
   private friendsStatusListener = new Subject<Friend[]>();
 
   pickedFriend: Friend = { friendUsername: " OnSug ", friendId: "21na" };
@@ -103,21 +103,37 @@ export class FriendsService {
             console.log("Search Result:", result);
             // Handle new backend response (200 OK with found: true/false)
             if (result.found) {
-               this.searchfriendStatusListener.next({ friendId: result.friendId, found: true });
+               this.searchfriendStatusListener.next({
+                 friendId: result.friendId,
+                 found: true,
+                 message: "Friend found! Click 'Add' below."
+               });
             } else {
-               this.searchfriendStatusListener.next({ friendId: "", found: false });
+               this.searchfriendStatusListener.next({
+                 friendId: "",
+                 found: false,
+                 message: "User not found. Try a different name."
+               });
             }
           },
           error: error => {
              console.log("Error !!!", error);
              // Fallback for network errors
-             this.searchfriendStatusListener.next({ friendId: "", found: false });
+             this.searchfriendStatusListener.next({
+               friendId: "",
+               found: false,
+               message: "Something went wrong. Please try again."
+             });
           },
         });
 
     } else {
       console.log("It's you ...  -_+");
-      // Could emit an error or handle "self-search" specifically if needed
+      this.searchfriendStatusListener.next({
+        friendId: "",
+        found: false,
+        message: "You cannot add yourself!"
+      });
     }
   }
 

@@ -53,7 +53,7 @@ export const searchMulti = async (query: string): Promise<AppShow[]> => {
         const title = item.original_title || item.original_name || "Unknown Title";
         const img = item.poster_path
           ? `${TMDB_IMAGE_BASE_URL}${item.poster_path}`
-          : "https://via.placeholder.com/500x750?text=No+Image"; // Fallback image
+          : "https://placehold.co/500x750?text=No+Image"; // Fallback image
 
         // Handle ratings (round to 1 decimal)
         const rating = item.vote_average ? Math.round(item.vote_average * 10) / 10 : 0;

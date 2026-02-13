@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FriendsService } from '../friends.service';
 import { Friend } from '../friend';
+import { FriendsService } from '../friends.service';
 
 @Component({
   selector: 'app-friends-search',
@@ -25,15 +25,22 @@ export class FriendsSearchComponent implements OnInit, OnDestroy {
 
   constructor(private friendsService: FriendsService) { }
 
+  searchMessage: string = "";
+  isFound: boolean = false;
+
   ngOnInit() {
     this.searchStatusSub = this.friendsService.getSearchStatusListener().subscribe(
       searchStatus => {
         this.isLoading = false;
-        // { friendId: result.friendId, found: result.found }
+        // { friendId: result.friendId, found: result.found, message: result.message }
         this.friendFound = searchStatus.found;
-        this.friend = { friendUsername: this.friendName, friendId: searchStatus.friendId };
+        this.isFound = searchStatus.found;
+        this.searchMessage = searchStatus.message;
 
-        this.fillFriend();
+        if (searchStatus.found) {
+             this.friend = { friendUsername: this.friendName, friendId: searchStatus.friendId };
+             this.fillFriend();
+        }
       });
 
 

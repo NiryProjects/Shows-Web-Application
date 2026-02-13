@@ -2,7 +2,7 @@
   <div class="widthForm">
     <div>
       <div *ngIf="!friendFound">
-        <h1> Search Friend</h1>
+        <h1>Search Friend</h1>
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <form (ngSubmit)="onSearch()" *ngIf="!isLoading" [formGroup]="form">
           <!-- <mat-form-field>
@@ -11,16 +11,44 @@
         </mat-form-field> -->
 
           <mat-form-field>
-            <input matInput name="username" type="text" placeholder="Username" formControlName="username">
-            <mat-error *ngIf="form.invalid">Please enter a valid username (letters, numbers, -, _) min 4
-              chars.</mat-error>
+            <input
+              matInput
+              name="username"
+              type="text"
+              placeholder="Username"
+              formControlName="username"
+            />
+            <mat-error *ngIf="form.invalid"
+              >Please enter a valid username (letters, numbers, -, _) min 4
+              chars.</mat-error
+            >
           </mat-form-field>
-          <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Search</button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            *ngIf="!isLoading"
+          >
+            Search
+          </button>
+
+          <div
+            *ngIf="searchMessage"
+            class="feedback-msg"
+            [style.color]="isFound ? 'green' : 'red'"
+            style="margin-top: 10px; font-weight: bold"
+          >
+            <h3>{{ searchMessage }}</h3>
+          </div>
         </form>
       </div>
 
       <div *ngIf="friendFound">
-        <app-friend-card [friend]="friendName" (onSuggest)="addFriend(friendName)" buttonLabel="Add"></app-friend-card>
+        <app-friend-card
+          [friend]="friendName"
+          (onSuggest)="addFriend(friendName)"
+          buttonLabel="Add"
+        ></app-friend-card>
       </div>
     </div>
   </div>
